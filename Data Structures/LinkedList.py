@@ -1,3 +1,6 @@
+from tkinter import EXCEPTION
+
+
 class LinkedList:
     def __init__(self,nodes=None):
         self.head =None
@@ -37,7 +40,38 @@ class LinkedList:
             pass
         
         current_node.next=node
+    
+    def add_after(self,target_node_data,new_node):
+        if self.head is None:
+            raise Exception("List is empty")
         
+        for node in self:
+            if node.data==target_node_data:
+                new_node.data=node.next
+                node.next=new_node
+                return
+        
+        raise Exception(f"Node with data {target_node_data} not found")
+    
+    def add_before(self,target_node_data,new_node):
+        if self.head is None:
+            raise Exception("List is empty")
+        
+        if self.head.data==target_node_data:
+            return self.add_first(new_node)
+        
+        prev_node=self.head
+        
+        for node in self:
+            if node.data==target_node_data:
+                prev_node.next=new_node
+                new_node.next=node
+                return
+            prev_node=node
+        
+        raise Exception(f"Node with data {target_node_data} not found") 
+
+
 class Node:
     def __init__(self,data):
         self.data=data
