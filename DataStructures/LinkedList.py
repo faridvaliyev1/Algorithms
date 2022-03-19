@@ -1,6 +1,5 @@
 from tkinter import EXCEPTION
 
-
 class LinkedList:
     def __init__(self,nodes=None):
         self.head =None
@@ -71,6 +70,24 @@ class LinkedList:
         
         raise Exception(f"Node with data {target_node_data} not found") 
 
+    def remove_node(self,target_node_data):
+        if self.head is None:
+            raise Exception("List is empty")
+        
+        if self.head.data==target_node_data:
+            self.head=self.head.next
+            return
+        
+        prev_node=self.head
+        
+        for node in self:
+            if node.data==target_node_data:
+                prev_node=node.next
+                return
+            prev_node=node
+        
+        raise Exception(f"Node with data {target_node_data} not found")
+        
 
 class Node:
     def __init__(self,data):
@@ -79,4 +96,3 @@ class Node:
     
     def __repr__(self):
         return self.data
-    
